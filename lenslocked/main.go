@@ -20,7 +20,7 @@ func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>Welcome to my awesome site! Version: v2.0.9</h1>")
+	fmt.Fprint(w, "<h1>Welcome to my awesome site! Version: v2.0.10</h1>")
 
 }
 
@@ -41,7 +41,6 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	var router Router
 	fmt.Println("Starting the server on :3000...")
-	http.ListenAndServe(":3000", router)
+	http.ListenAndServe(":3000", http.HandlerFunc(pathHandler))
 }
