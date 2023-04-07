@@ -6,10 +6,10 @@ import (
 )
 
 type User struct {
-	Name         string
-	JerseyNumber int
-	GamesPlayed  int
-  FavoriteFoods []string
+	Name          string
+	JerseyNumber  int
+	GamesPlayed   int
+	FavoriteFoods []string
 }
 
 func main() {
@@ -18,14 +18,14 @@ func main() {
 		panic(err)
 	}
 
-  user := User{
-    Name:         "Jackie Robinson",
-    JerseyNumber: 42,
-    GamesPlayed:  33,
-    FavoriteFoods: []string{"burger", "steak", "salmon"},
-  }
+	user := User{
+		Name:          "Jackie Robinson",
+		JerseyNumber:  42,
+		GamesPlayed:   33,
+		FavoriteFoods: []string{"burger", "steak", "salmon"},
+	}
 
-  err = t.Execute(os.Stdout, user)
+	err = t.Execute(os.Stdout, user)
 	if err != nil {
 		panic(err)
 	}

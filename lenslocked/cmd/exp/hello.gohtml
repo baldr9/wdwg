@@ -1,14 +1,14 @@
 <h1>Hello, {{.Name}}</h1>
 <p>Jersey Number: {{.JerseyNumber}}</p>
 <p>Games Played: {{.GamesPlayed}}</p>
-<p>
+<p>Your favorite foods are:
 {{/* adding -}} removes end line being added */}}
 {{- range .FavoriteFoods -}}
   <li>{{ . }}</li>
 {{ end -}}
 </p>
 <p>{{ if lt .GamesPlayed 50 }}
-  More games are left in the season.
+  You have more games to play this season.
 {{ end -}}
 </p>
 console.log(user);
