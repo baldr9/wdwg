@@ -37,6 +37,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func faqHandler(w http.ResponseWriter, r *http.Request) {
+	// The path is generated inline, there is no need to create a temporary variable tplPath
 	executeTemplate(w, filepath.Join("templates", "faq.gohtml"))
 }
 
