@@ -5,7 +5,11 @@
 {{/* adding -}} removes end line being added */}}
 {{- range .FavoriteFoods -}}
   <li>{{ . }}</li>
-{{end -}}
+{{ end -}}
+</p>
+<p>{{ if lt .GamesPlayed 50 }}
+  More games are left in the season.
+{{ end -}}
 </p>
 console.log(user);
 
