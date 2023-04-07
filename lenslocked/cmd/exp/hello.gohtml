@@ -1,0 +1,11 @@
+<h1>Hello, {{.Name}}</h1>
+<p>Jersey Number: {{.JerseyNumber}}</p>
+<p>Games Played: {{.GamesPlayed}}</p>
+<p>
+{{/* adding -}} removes end line being added */}}
+{{- range .FavoriteFoods -}}
+  <li>{{ . }}</li>
+{{end -}}
+</p>
+console.log(user);
+
