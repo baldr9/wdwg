@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/baldr9/lenslocked/views"
+	"github.com/baldr9/wdwg/lenslocked/views"
 )
 
 type Static struct {
