@@ -1,17 +1,21 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
-
-  "github.com/baldr9/wdwg/lenslocked/views"
 )
 
 type Users struct {
 	Templates struct {
-		New views.Template
+		New Template
 	}
 }
 
 func (u Users) New(w http.ResponseWriter, r *http.Request) {
 	u.Templates.New.Execute(w, nil)
+}
+
+func (u Users) Create(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<p>Create() Email: %s</p>", r.FormValue("email"))
+	fmt.Fprintf(w, "<p>Create() Password: %s</p>", r.FormValue("password"))
 }
