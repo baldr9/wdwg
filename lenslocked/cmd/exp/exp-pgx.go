@@ -29,10 +29,6 @@ func main() {
 		Database: "lenslocked",
 		SSLMode:  "disable",
 	}
-	// Note: String() method is implemented on the PosgresConfig type
-	// cfg.String(): host=localhost port=5432 user=baloo password=junglebook dbname=lenslocked sslmode=disable
-	// Result is that cfg parameter key=value strings are all lowercase and separated by spaces
-	fmt.Printf("cfg.String(): %v\n", cfg.String())
 	db, err := sql.Open("pgx", cfg.String())
 	if err != nil {
 		panic(err)
@@ -45,4 +41,31 @@ func main() {
 	}
 
 	fmt.Println("Connected!")
+
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    email TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS orders (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    amount INT,
+    description TEXT
+  );`)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Tables created.")
+
+	name := "Jon Calhoun"
+	email := "jon@calhoun.io"
+	_, err = db.Exec(`
+  INSERT INTO users(name, email)
+  VALUES($1, $2);`, name, email)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("User created.")
 }
