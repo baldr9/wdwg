@@ -59,7 +59,7 @@ func main() {
 	}
 	fmt.Println("Tables created.")
 
-	name := "New User 2"
+	name := "Student User"
 	email := "student@calhoun.io"
 	row := db.QueryRow(`
     INSERT INTO users (name, email)
