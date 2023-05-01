@@ -59,15 +59,43 @@ func main() {
 	}
 	fmt.Println("Tables created.")
 
-	name := "Student User"
-	email := "student@calhoun.io"
+	// name := "New User"
+	// email := "new@calhoun.io"
+	// row := db.QueryRow(`
+	//   INSERT INTO users (name, email)
+	//   VALUES ($1, $2) RETURNING id;`, name, email)
+	// var id int
+	// err = row.Scan(&id)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Println("User created. id =", id)
+
+	id := 1 // Choose an ID NOT in your users table
 	row := db.QueryRow(`
-    INSERT INTO users (name, email)
-    VALUES ($1, $2) RETURNING id;`, name, email)
-	var id int
-	err = row.Scan(&id)
+  SELECT name, email
+  FROM users
+  WHERE id=$1;`, id)
+	var name, email string
+	err = row.Scan(&name, &email)
+	if err == sql.ErrNoRows {
+		fmt.Println("Error, no rows!")
+	}
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("User created. id =", id)
+	fmt.Printf("User information: name=%s, email=%s\n", name, email)
+
+	userID := 1
+	for i := 1; i <= 5; i++ {
+		amount := i * 100
+		desc := fmt.Sprintf("Fake order #%d", i)
+		_, err := db.Exec(`
+      INSERT INTO orders(user_id, amount, description)
+      VALUES($1, $2, $3)`, userID, amount, desc)
+		if err != nil {
+			panic(err)
+		}
+	}
+	fmt.Println("Created fake orders.")
 }
